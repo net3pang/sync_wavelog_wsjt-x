@@ -97,7 +97,7 @@ func (c *Client) GetContacts() ([]map[string]interface{}, error) {
 		"station_id":    c.StationID,
 		"fetchfromid":   0,
 		"output_format": "json",
-		"fields":        []string{"CALL", "BAND", "MODE", "QSO_DATE", "TIME_ON", "RST_RCVD", "RST_SENT"},
+		"fields":        []string{"CALL", "BAND", "MODE", "QSO_DATE", "TIME_ON", "RST_RCVD", "RST_SENT", "GRIDSQUARE"},
 	}
 	body, err := c.doPost(c.URL+"/api/get_contacts_adif", payload)
 	if err != nil {

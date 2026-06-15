@@ -124,13 +124,14 @@ func (a *App) SyncFromWavelog() error {
 			continue
 		}
 		newADIFs = append(newADIFs, adif.MakeRecord(map[string]string{
-			"CALL":     call,
-			"QSO_DATE": qd,
-			"TIME_ON":  to,
-			"BAND":     toStr(c["BAND"]),
-			"MODE":     toStr(c["MODE"]),
-			"RST_SENT": toStr(c["RST_SENT"]),
-			"RST_RCVD": toStr(c["RST_RCVD"]),
+			"CALL":        call,
+			"QSO_DATE":    qd,
+			"TIME_ON":     to,
+			"BAND":        toStr(c["BAND"]),
+			"MODE":        toStr(c["MODE"]),
+			"RST_SENT":    toStr(c["RST_SENT"]),
+			"RST_RCVD":    toStr(c["RST_RCVD"]),
+			"GRIDSQUARE": toStr(c["GRIDSQUARE"]),
 		}))
 	}
 
@@ -236,13 +237,14 @@ func (a *App) SyncAll() error {
 			continue
 		}
 		downloaded = append(downloaded, adif.MakeRecord(map[string]string{
-			"CALL":     call,
-			"QSO_DATE": qd,
-			"TIME_ON":  to,
-			"BAND":     toStr(c["BAND"]),
-			"MODE":     toStr(c["MODE"]),
-			"RST_SENT": toStr(c["RST_SENT"]),
-			"RST_RCVD": toStr(c["RST_RCVD"]),
+			"CALL":        call,
+			"QSO_DATE":    qd,
+			"TIME_ON":     to,
+			"BAND":        toStr(c["BAND"]),
+			"MODE":        toStr(c["MODE"]),
+			"RST_SENT":    toStr(c["RST_SENT"]),
+			"RST_RCVD":    toStr(c["RST_RCVD"]),
+			"GRIDSQUARE": toStr(c["GRIDSQUARE"]),
 		}))
 	}
 

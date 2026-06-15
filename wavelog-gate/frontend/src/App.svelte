@@ -27,7 +27,7 @@
     window.runtime.EventsOff('log')
   })
 
-  const VERSION = 'v1.0.0'
+  const VERSION = 'v1.1.0'
 
   function addLog(msg: string, type = 'info') {
     const ts = new Date().toLocaleTimeString('zh-CN', { hour12: false })
