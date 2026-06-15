@@ -61,9 +61,18 @@ jobs:
         run: |
           npm install --prefix frontend
           wails build -platform darwin/arm64
+          ls -la build/bin/
 
       - name: Package
-        run: ditto -c -k --keepParent build/bin/WSJT-Wavelog-Gate.app build/bin/WSJT-Wavelog-Gate-arm64.zip
+        run: |
+          cd build/bin
+          if [ -d "WSJT-Wavelog-Gate.app" ]; then
+            ditto -c -k --keepParent WSJT-Wavelog-Gate.app WSJT-Wavelog-Gate-arm64.zip
+          elif [ -f "WSJT-Wavelog-Gate" ]; then
+            zip WSJT-Wavelog-Gate-arm64.zip WSJT-Wavelog-Gate
+          else
+            echo "No build output found!" && ls -la && exit 1
+          fi
 
       - name: Upload Release Asset
         uses: softprops/action-gh-release@v2
@@ -98,9 +107,18 @@ jobs:
         run: |
           npm install --prefix frontend
           wails build -platform darwin/amd64
+          ls -la build/bin/
 
       - name: Package
-        run: ditto -c -k --keepParent build/bin/WSJT-Wavelog-Gate.app build/bin/WSJT-Wavelog-Gate-amd64.zip
+        run: |
+          cd build/bin
+          if [ -d "WSJT-Wavelog-Gate.app" ]; then
+            ditto -c -k --keepParent WSJT-Wavelog-Gate.app WSJT-Wavelog-Gate-amd64.zip
+          elif [ -f "WSJT-Wavelog-Gate" ]; then
+            zip WSJT-Wavelog-Gate-amd64.zip WSJT-Wavelog-Gate
+          else
+            echo "No build output found!" && ls -la && exit 1
+          fi
 
       - name: Upload Release Asset
         uses: softprops/action-gh-release@v2
