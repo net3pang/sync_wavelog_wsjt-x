@@ -66,13 +66,13 @@ jobs:
       - name: Package
         run: |
           cd build/bin
-          if [ -d "WSJT-Wavelog-Gate.app" ]; then
-            ditto -c -k --keepParent WSJT-Wavelog-Gate.app WSJT-Wavelog-Gate-arm64.zip
-          elif [ -f "WSJT-Wavelog-Gate" ]; then
-            zip WSJT-Wavelog-Gate-arm64.zip WSJT-Wavelog-Gate
-          else
-            echo "No build output found!" && ls -la && exit 1
-          fi
+          ls -la
+          APP=""; [ -d "WSJT-Wavelog-Gate.app" ] && APP="WSJT-Wavelog-Gate.app"
+          [ -z "$APP" ] && [ -d "wavelog-gate.app" ] && APP="wavelog-gate.app"
+          [ -z "$APP" ] && [ -f "WSJT-Wavelog-Gate" ] && APP="WSJT-Wavelog-Gate"
+          if [ -z "$APP" ]; then echo "No build output found!" && exit 1; fi
+          echo "Packaging: $APP"
+          if [ -d "$APP" ]; then ditto -c -k --keepParent "$APP" WSJT-Wavelog-Gate-arm64.zip; else zip WSJT-Wavelog-Gate-arm64.zip "$APP"; fi
 
       - name: Upload Release Asset
         uses: softprops/action-gh-release@v2
@@ -112,13 +112,13 @@ jobs:
       - name: Package
         run: |
           cd build/bin
-          if [ -d "WSJT-Wavelog-Gate.app" ]; then
-            ditto -c -k --keepParent WSJT-Wavelog-Gate.app WSJT-Wavelog-Gate-amd64.zip
-          elif [ -f "WSJT-Wavelog-Gate" ]; then
-            zip WSJT-Wavelog-Gate-amd64.zip WSJT-Wavelog-Gate
-          else
-            echo "No build output found!" && ls -la && exit 1
-          fi
+          ls -la
+          APP=""; [ -d "WSJT-Wavelog-Gate.app" ] && APP="WSJT-Wavelog-Gate.app"
+          [ -z "$APP" ] && [ -d "wavelog-gate.app" ] && APP="wavelog-gate.app"
+          [ -z "$APP" ] && [ -f "WSJT-Wavelog-Gate" ] && APP="WSJT-Wavelog-Gate"
+          if [ -z "$APP" ]; then echo "No build output found!" && exit 1; fi
+          echo "Packaging: $APP"
+          if [ -d "$APP" ]; then ditto -c -k --keepParent "$APP" WSJT-Wavelog-Gate-amd64.zip; else zip WSJT-Wavelog-Gate-amd64.zip "$APP"; fi
 
       - name: Upload Release Asset
         uses: softprops/action-gh-release@v2
